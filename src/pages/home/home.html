@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Daily Weather</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="updateWeather()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="blue">
+  <ion-list>
+    <ion-item class="border-rounded">
+      <ion-label stacked>City</ion-label>
+      <ion-input [(ngModel)]="city"></ion-input>
+      <button ion-button item-right outline (click)="updateWeather(city)">Go</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid *ngIf="forecast">
+    <ion-row class="forecast">
+      <ion-col col-6 offset-25 class="center center-text" >
+        <h2>{{forecast.city}}</h2>
+        <img src="https://openweathermap.org/img/w/{{forecast.weather.icon}}.png" alt="">
+        <h3>{{forecast.weather.description | capitalize}}</h3>
+        <h1>{{forecast.data.temp | number:'.1-1' }}&deg;</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list class="data">
+          <ion-item>
+            <strong>Temperature:</strong>
+            {{forecast.data.temp | number:'.1-1'}}
+          </ion-item>
+          <ion-item>
+            <strong>Humidity:</strong>
+            {{forecast.data.humidity}} %
+          </ion-item>
+          <ion-item>
+            <strong>Max. Temp.:</strong>
+            {{forecast.data.temp_max| number:'.1-1'}}
+          </ion-item>
+          <ion-item>
+            <strong>Min. Temp.:</strong>
+            {{forecast.data.temp_min | number:'.1-1'}}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
